@@ -5,7 +5,7 @@
 #Find the sum of all the multiples of 3 or 5 below 1000.
 
 
-#we can do this by simply counting 
+#we can do this by simply counting these numbers
 
 def sum_integers(bound):
 
