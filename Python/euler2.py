@@ -8,7 +8,8 @@
 #By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
 
-#the upper bound isn't really that large, so we can just brute force this
+#the upper bound isn't really that large, so we can just brute force this.
+#if it were larger, we could use some tricks: only every third term will be even; there are closed form expressions for these terms, etc.
 
 def sum_even(bound):
     
