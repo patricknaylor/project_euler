@@ -36,8 +36,7 @@
 #we don't want to brute force this problem -- that will wind up being a lot of additions.
 #instead, note that the paths are ordered! They're in bijection with binary numbers less than 2^15, which are definitely ordered.
 #what we'll try to do is work our way through this space of paths, keeping track of the sum as we go.
-#we'll only have to change one number, so that should work out to two additions per path; which means something on the order of 2^17 calculations!
-#hopefully, this will be smart enough for Problem 67.
+#hopefully, this will be smart enough for Problem 67 (update: it isn't)
 
 #first, we'll get the triangle using some list comprehension
 input_triangle = '''75
@@ -105,7 +104,8 @@ def largest_path(triangle):
 
     return max_path_sum, max_path
 
-#output the answer! Now, we'll see if this works on Problem 67.        
+#output the answer! 
+
 print("The sum of the largest path is {}.".format(largest_path(triangle)[0]))
 
-
+#The answer is 1074
