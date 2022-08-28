@@ -1,12 +1,13 @@
 ############################################
 #
-#Project Euler Problem 13
+# Project Euler Problem 13
 #
-#Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
+# Work out the first ten digits of the sum of the following one-hundred 50-digit numbers.
+#
 ############################################
 
 
-webinput = '''37107287533902102798797998220837590246510135740250
+web_input = '''37107287533902102798797998220837590246510135740250
 46376937677490009712648124896970078050417018260538
 74324986199524741059474233309513058123726617309629
 91942213363574161572522430563301811072406154908250
@@ -107,39 +108,7 @@ webinput = '''37107287533902102798797998220837590246510135740250
 20849603980134001723930671666823555245252804609722
 53503534226472524250874054075591789781264330331690'''
 
+# with list comprehension, we can do this really easily!
 
-#you could probably do this by converting the product to a sum with logarithms
-#(I might come back and do this later to see what the difference in runtime is)
-#rather than adding each number, we will just add down the columns and take the sum with
-#appropriate powers of 10 so there's less additions to do
-
-def get_sum(string):
-
-    numbers = []
-    for i in range(100):
-        numbers.append(int(string[51*i:51*(i+1)]))
-
-    colsums = []
-    col = 0
-    for i in range(50):
-        for j in range(100):
-            col += int(str(numbers[j])[i])
-        colsums.append(col)
-        col = 0
-
-    total = 0
-    for i in range(50):
-        total += colsums[i]*(10**(50-i))
-
-    return total
-
-
-print("The sum of these numbers is {}.".format(get_sum(webinput)))
-
-#The answer is 55373762303908766373020487468329859717736598318926720
-
-
-
-
-    
-    
+big_sum = sum([int(i) for i in web_input.split()])
+print("The sum of these numbers is {}.".format(big_sum))

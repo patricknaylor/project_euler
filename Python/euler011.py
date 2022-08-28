@@ -1,11 +1,13 @@
 ########################################
 #
-#Project Euler Problem 11
+# Project Euler Problem 11
 #
-#What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
+# What is the greatest product of four adjacent numbers in the same direction
+# (up, down, left, right, or diagonally) in the 20×20 grid?
+#
 ########################################
 
-input_grid='''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+input_grid = '''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
@@ -27,65 +29,69 @@ input_grid='''08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48'''
 
 
-#first, use some list comprehension so that we have a matrix to work with
+# first, use some list comprehension so that we have a matrix to work with
 rows = input_grid.split("\n")
 str_grid = [row.split() for row in rows]
-grid = [[int(item) for item in row] for row in str_grid]
+big_matrix = [[int(item) for item in row] for row in str_grid]
 
-#import math has this same function, but what the heck
-def prod(list):
+
+# now, compute the largest product by brute force
+def prod(lst):
     product = 1
-    for i in list:
+    for i in lst:
         product *= i
     return product
 
-#next, compute the maximum in each direction
 
 def horizontal_max(grid):
-    max = 0
+    hmax = 0
     for i in range(20):
         for j in range(20):
-            if j+3<20:
-                new_max = prod(grid[i][j:j+4])
-                if new_max > max:
-                    max = new_max
-    return max
+            if j + 3 < 20:
+                new_max = prod(grid[i][j:j + 4])
+                if new_max > hmax:
+                    hmax = new_max
+    return hmax
+
 
 def vertical_max(grid):
-    max = 0
+    vmax = 0
     for i in range(20):
         for j in range(20):
-            if i+3<20:
-                new_max = grid[i][j]*grid[i+1][j]*grid[i+2][j]*grid[i+3][j]
-                if new_max > max:
-                    max = new_max
-    return max
+            if i + 3 < 20:
+                new_max = grid[i][j] * grid[i + 1][j] * grid[i + 2][j] * grid[i + 3][j]
+                if new_max > vmax:
+                    vmax = new_max
+    return vmax
 
-def DR_max(grid):
-    max = 0
+
+def dr_max(grid):
+    drmax = 0
     for i in range(20):
         for j in range(20):
-            if i+3<20 and j+3<20:
-                new_max = grid[i][j]*grid[i+1][j+1]*grid[i+2][j+2]*grid[i+3][j+3]
-                if new_max > max:
-                    max = new_max
-    return max
+            if i + 3 < 20 and j + 3 < 20:
+                new_max = grid[i][j] * grid[i + 1][j + 1] * grid[i + 2][j + 2] * grid[i + 3][j + 3]
+                if new_max > drmax:
+                    drmax = new_max
+    return drmax
 
-def UR_max(grid):
-    max = 0
+
+def ur_max(grid):
+    urmax = 0
     for i in range(20):
         for j in range(20):
-            if i-3<20 and j+3<20:
-                new_max = grid[i][j]*grid[i-1][j+1]*grid[i-2][j+2]*grid[i-3][j+3]
-                if new_max > max:
-                    max = new_max
-    return max
+            if i - 3 < 20 and j + 3 < 20:
+                new_max = grid[i][j] * grid[i - 1][j + 1] * grid[i - 2][j + 2] * grid[i - 3][j + 3]
+                if new_max > urmax:
+                    urmax = new_max
+    return urmax
 
 
-#last, compare all of these
 def max_product(grid):
-    return max(horizontal_max(grid),vertical_max(grid),DR_max(grid),UR_max(grid))
 
-print("The largest product is {}.".format(max_product(grid)))
+    # next, compute the maximum in each direction
 
-#The answer is 70600674.
+    return max(horizontal_max(grid), vertical_max(grid), dr_max(grid), ur_max(grid))
+
+
+print("The largest product is {}.".format(max_product(big_matrix)))
