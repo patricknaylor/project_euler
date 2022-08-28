@@ -1,31 +1,37 @@
 #########################################
-#Project Euler Problem 10
 #
-#The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
-#Find the sum of all the primes below two million.
+# Project Euler Problem 10
+#
+# The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+# Find the sum of all the primes below two million.
+#
 #########################################
 
 
-#first, get a list of all primes less than the specified bound using a sieve
-#there might be a more clever way to implement the sieve without storing the whole list
-#but this will certainly work
+# first, get a list of all primes less than the specified bound using a sieve
 
-def get_primes(bound): 
-    integers = [i for i in range(bound)]
+def get_primes(bound):
+    primes = [True for _ in range(bound)]
+    primes[0], primes[1] = False, False
 
-    i = 2 #start at the first prime
-    while i*i < bound: #only have to remove elements up to sqrt(bound)
-        for j in range(i+1,bound):
-            if j%i == 0:
-                integers[j] = 0 
-        i += 1
-    primes = [item for item in integers if item != 0 and item !=1]
+    p = 2
+
+    while p * p < bound:
+
+        # given a prime number p
+        if primes[p]:
+
+            # all multiples of p aren't prime!
+            for n in range(p * p, bound, p):
+                primes[n] = False
+
+        # lastly, increment the number
+        p += 1
+
     return primes
 
 
-bound = 2000000
-sum  = sum(get_primes(bound))
+is_prime = get_primes(2000000)
+sum_primes = sum([p for p in range(2000000) if is_prime[p]])
 
-print("The sum of the primes less than {} is {}.".format(bound, sum))
-
-#The answer is 142913828922
+print("The sum of the primes less than {} is {}.".format(2000000, sum_primes))
