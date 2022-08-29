@@ -54,5 +54,7 @@ sum_of_abundant_set = set(sum_of_abundant)
 
 # to get the sum of numbers which -aren't- sums of abundant numbers;
 # subtract the sum of the previous set from the sum of integers from 1 to (28123-1).
+
 total = int(28122 * 28123 / 2) - sum(sum_of_abundant_set)
+
 print("The sum of numbers not equal to a sum of two abundant numbers is {}.".format(total))
