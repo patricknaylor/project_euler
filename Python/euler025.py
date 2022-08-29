@@ -15,19 +15,17 @@
 current_term = [1, 2]
 previous_term = [1, 1]
 
+
 # this function will return the index of the first fibonacci number with that number of digits
 
 def find_index(digits):
 
-    found = False
-    
-    while found == False:
+    while True:
         
         next_term = current_term[0] + previous_term[0]
         next_index = current_term[1] + 1
 
         if len(str(next_term)) >= digits:
-            found = True
             return next_index
         
         else:
@@ -38,6 +36,3 @@ def find_index(digits):
 
 
 print("The index of the first term of the Fibonacci sequence with 1000 digits is {}.".format(find_index(1000)))
-    
-# The answer is 4782    
-

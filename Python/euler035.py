@@ -14,7 +14,7 @@
 # store the primes as a boolean list; true means that index is prime
 
 def get_primes(bound):
-    primes = [True for i in range(bound)]
+    primes = [True for _ in range(bound)]
     primes[0], primes[1] = False, False
 
     p = 2
@@ -43,7 +43,8 @@ def get_circular_primes(bound):
     primes = [i for i in range(bound) if prime_list[i]]
     circular_primes = []
 
-    circulate = lambda num: int(str(num)[-1] + str(num)[:-1])
+    def circulate(num):
+        return int(str(num)[-1] + str(num)[:-1])
 
     # for each prime number
     for p in primes:
