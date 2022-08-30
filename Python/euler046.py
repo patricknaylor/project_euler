@@ -47,14 +47,15 @@ def get_primes(bound):
 is_prime = get_primes(10**7)
 primes_list = [p for p in range(10**7) if is_prime[p]]
 
+
 # this function uses our primes list to check if a number satisfies the conjecture
 def check_goldbach(num):
 
     # for each prime in our primes list
-    for p in range(2,num - 1):
+    for p in range(2, num - 1):
 
         if is_prime[p]:
-            sqr = int( (num - p) / 2)
+            sqr = int((num - p) / 2)
             sqrt = sqr**0.5
 
             if int(sqrt)**2 == sqr:
@@ -85,4 +86,3 @@ def find_counterexample():
 
 
 print("The first counterexample to this conjecture is {}.".format(find_counterexample()))
-                    
